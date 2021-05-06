@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:snap/signUp.dart';
 import 'package:snap/users.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'menu.dart';
 class logIn extends StatefulWidget {
   @override
-  _addUserState createState() => _addUserState();
+  _logInState createState() => _logInState()
+  ;
 }
 
-class _addUserState extends State<logIn> {
+class _logInState extends State<logIn> {
   var _formKey = GlobalKey<FormState>();
 
   String phoneNumber;
@@ -33,7 +36,7 @@ class _addUserState extends State<logIn> {
                 validator: (String value){
                   for(int i =0 ; i < users.myUsers.length ; i++){
                     if(value == users.myUsers[i].phoneNumber){
-                      index = 1;
+                       index = i;
                       return null;
                     }
                   }
@@ -42,30 +45,28 @@ class _addUserState extends State<logIn> {
 
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  hintText:"enter your password",
-                ),
                 onSaved: (String value) {
                   password= value;
                 },
+
                 validator: (String value){
                   if(users.myUsers[index].password==value)
                     return null;
                   return "the password is wrong";
                 },
-
-
+                decoration: InputDecoration(
+                  hintText:"enter your password",
+                ),
               ),
-
               ElevatedButton(
-
                 child: Text("log in!"),
                 onPressed: (){
                   if (_formKey.currentState.validate()) {
                     setState(() {
                       _formKey.currentState.save();
-                      Navigator.pop(context);//ba botton shit msl ye safhe barkhord mikone
+                      Navigator.push(context, new MaterialPageRoute(builder: (context) => menu()));
                     });
+
                   }
                 },
               ),

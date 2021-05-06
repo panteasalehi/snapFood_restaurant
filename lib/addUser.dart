@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:snap/signUp.dart';
 import 'package:snap/users.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 class addUser extends StatefulWidget {
   @override
   _addUserState createState() => _addUserState();
@@ -90,6 +89,7 @@ class _addUserState extends State<addUser> {
                       users.addUser(signUp(name, address, type, phoneNumber, password));
                       Navigator.pop(context);//ba botton shit msl ye safhe barkhord mikone
                     });
+
                   }
                 },
               ),

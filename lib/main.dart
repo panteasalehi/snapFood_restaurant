@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap/addUser.dart';
 
+import 'logIn.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "main": (context) => addUser(),
+
       },
       title: 'Snap food!',
       theme: ThemeData(
@@ -65,14 +68,14 @@ return Scaffold(
                   onTap: (
 
                   ){
-                    Navigator.pushNamed(context, "main" , arguments: index);
+                    Navigator.pushNamed(context, "main" , arguments: index);//go to sign up page
                   },
                 ),
                 Spacer(),
                 GestureDetector(
                   child: welcome(context, "log in",height),
                   onTap: (){
-
+                    Navigator.push(context, new MaterialPageRoute(builder: (context) => logIn()));//go to log in page
                   },
                 ),
                 Spacer(),
