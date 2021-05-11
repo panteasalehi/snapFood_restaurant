@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snap/choosePhoto.dart';
 import 'package:snap/editingMenu.dart';
 class menu extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class menu extends StatefulWidget {
 class _menuState extends State<menu> {
   @override
   Widget build(BuildContext context) {
+
     int index = ModalRoute.of(context).settings.arguments as int;
     return Scaffold(
     body: Container(
