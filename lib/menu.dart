@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snap/editingMenu.dart';
 class menu extends StatefulWidget {
   @override
   _menuState createState() => _menuState();
@@ -10,7 +11,7 @@ class menu extends StatefulWidget {
 class _menuState extends State<menu> {
   @override
   Widget build(BuildContext context) {
-
+    int index = ModalRoute.of(context).settings.arguments as int;
     return Scaffold(
     body: Container(
       child: ListView(
@@ -20,25 +21,53 @@ class _menuState extends State<menu> {
           Row(
             children: [
               Spacer(),
-              _choice(context, "snapfoodPic/images.jfif", "editing menu"),
+              GestureDetector(
+                child: _choice(context, "snapfoodPic/images.jfif", "editing menu"),
+                onTap: (){
+                  Navigator.pushNamed(context, "/menu" , arguments: index);
+                },
+              ),
+
               Spacer(),
-              _choice(context, "snapfoodPic/download.jfif", "adding photo"),
+              GestureDetector(
+                child: _choice(context, "snapfoodPic/download.jfif", "adding photo"),
+                onTap: (){
+
+                },
+              ),
               Spacer(),
             ],
           ),
           Row(
             children: [
               Spacer(),
-              _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
+              GestureDetector(
+                child:  _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
+                onTap: (){
+
+                },
+              ),
               Spacer(),
-              _choice(context, "snapfoodPic/images (2).jfif", "History"),
+              GestureDetector(
+                child:  _choice(context, "snapfoodPic/images (2).jfif", "History"),
+                onTap: (){
+
+                },
+              ),
+
               Spacer(),
             ],
           ),
           Row(
             children: [
               Spacer(),
-              _choice(context, "snapfoodPic/images (1).jfif", "accounting"),
+              GestureDetector(
+                child: _choice(context, "snapfoodPic/images (1).jfif", "accounting"),
+                onTap: (){
+
+                },
+              ),
+
               Spacer(),
             ],
           ),

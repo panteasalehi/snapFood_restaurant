@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap/addUser.dart';
+import 'package:snap/editingMenu.dart';
+import 'package:snap/foodS.dart';
+import 'package:snap/myfood.dart';
 
 import 'logIn.dart';
 
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "main": (context) => addUser(),
-
+        "/menu": (context) => editingMenu(),
       },
       title: 'Snap food!',
       theme: ThemeData(
@@ -50,7 +53,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context).settings.arguments as int;
 double height = MediaQuery.of(context).size.height;
-
 
 return Scaffold(
 

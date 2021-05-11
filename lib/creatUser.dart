@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snap/signUp.dart';
 import 'package:snap/users.dart';
 
 class sign extends StatelessWidget {
@@ -65,3 +64,19 @@ class sign extends StatelessWidget {
     );
   }
 }
+/*
+ appBar: AppBar(
+       title:Text("ویرایش منو"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));
+            },
+          )
+        ],
+      ),
+ */
