@@ -15,7 +15,7 @@ class editingMenu extends StatefulWidget {
 
 class _editingMenuState extends State<editingMenu> {
 
-change(int number,String name , String p, String d){
+change(int number,String name , String p, String d){//this is the function for changing the food
   foodS.getFoods().elementAt(number).description=d;
   foodS.getFoods().elementAt(number).price=p;
   foodS.getFoods().elementAt(number).name=name;
@@ -36,7 +36,7 @@ change(int number,String name , String p, String d){
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));
+              Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
             },
           )
         ],
@@ -97,7 +97,7 @@ change(int number,String name , String p, String d){
                             ),
                             onTap: (){
                               setState(() {
-                               Navigator.push(context, new MaterialPageRoute(builder: (context) => details(change,index)));
+                               Navigator.push(context, new MaterialPageRoute(builder: (context) => details(change,index)));//this will pass the number of the food we want to change as index
                               });
                             },
                           ),

@@ -12,7 +12,7 @@ class details extends StatefulWidget {
 }
 
 class _detailsState extends State<details> {
-String Nname,Nprice,Ndescription;
+String Nname,Nprice,Ndescription;//the new names that we want have
   var _formKey;
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ String Nname,Nprice,Ndescription;
                               child: ListView(
                                 children: [
                                   TextFormField(
-                                    onChanged: (String value) {
+                                    onChanged: (String value) {//onchanged helps to save the entry
                                        Nname = value;
                                     },
                                     decoration: InputDecoration(
@@ -62,8 +62,8 @@ String Nname,Nprice,Ndescription;
                                     child: Text("add"),
                                     onPressed: () {
                                       setState(() {
-                                        widget.change(widget.num,Nname,Nprice,Ndescription);
-                                       Navigator.push(context, new MaterialPageRoute(builder: (context) => editingMenu()));
+                                        widget.change(widget.num,Nname,Nprice,Ndescription);//when we call this function it will made the changes we want in the editing menu
+                                       Navigator.push(context, new MaterialPageRoute(builder: (context) => editingMenu()));//going back and seeing result
                                       });
                                     },
                                   ),
