@@ -8,5 +8,7 @@ class foodS{
    static List<myfood> getFoods(){
     return myfoods;
   }
-
+  static void removeFood(myfood f){
+    myfoods.remove(f);
+  }
 }

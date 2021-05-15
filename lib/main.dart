@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:snap/Remove.dart';
 import 'package:snap/addUser.dart';
 import 'package:snap/details.dart';
 import 'package:snap/foodS.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snap/addFood.dart';
 import 'package:snap/choosePhoto.dart';
 import 'package:snap/details.dart';
+import 'Remove.dart';
 import 'foodS.dart';
 import 'myfood.dart';
 import 'package:snap/main.dart';
@@ -20,6 +21,13 @@ change(int number,String name , String p, String d){//this is the function for c
   foodS.getFoods().elementAt(number).price=p;
   foodS.getFoods().elementAt(number).name=name;
 }
+delete(String name){
+
+  for(int i = 0 ; i< foodS.getFoods().length;i++){
+    if(name == foodS.getFoods().elementAt(i).name)
+      foodS.removeFood(foodS.getFoods().elementAt(i));
+  }
+}
   @override
 
   Widget build(BuildContext context) {
@@ -30,16 +38,34 @@ change(int number,String name , String p, String d){//this is the function for c
       appBar: AppBar(
         title: Text('My App'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.local_pizza_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
-            },
-          )
+          Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.local_pizza_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
+                  },
+
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.greenAccent,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,new MaterialPageRoute(builder: (context) => Remove(delete)));//deleting food
+                  },
+
+                )
+              ],
+          ),
+
+
         ],
+
       ),
 
       body: Container(
