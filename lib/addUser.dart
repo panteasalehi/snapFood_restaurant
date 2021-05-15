@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap/menu.dart';
 import 'package:snap/signUp.dart';
 import 'package:snap/users.dart';
 import 'package:flutter/cupertino.dart';
@@ -87,7 +88,7 @@ class _addUserState extends State<addUser> {
                     setState(() {
                       _formKey.currentState.save();
                       users.addUser(signUp(name, address, type, phoneNumber, password));
-                      Navigator.pop(context);//ba botton shit msl ye safhe barkhord mikone
+                      Navigator.push(context, new MaterialPageRoute(builder: (context) => menu()));//ba botton shit msl ye safhe barkhord mikone
                     });
 
                   }

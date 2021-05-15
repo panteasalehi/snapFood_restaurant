@@ -2,22 +2,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snap/addFood.dart';
 import 'package:snap/choosePhoto.dart';
+import 'package:snap/details.dart';
 import 'foodS.dart';
 import 'myfood.dart';
-
-
+import 'package:snap/main.dart';
+//first page
 class editingMenu extends StatefulWidget {
+
   @override
   _editingMenuState createState() => _editingMenuState();
 }
 
 class _editingMenuState extends State<editingMenu> {
+
+change(int number,String name , String p, String d){
+  foodS.getFoods().elementAt(number).description=d;
+  foodS.getFoods().elementAt(number).price=p;
+  foodS.getFoods().elementAt(number).name=name;
+}
   @override
 
   Widget build(BuildContext context) {
 
     int index = ModalRoute.of(context).settings.arguments as int;
     return Scaffold(
+
       appBar: AppBar(
         title: Text('My App'),
         actions: <Widget>[
@@ -27,11 +36,12 @@ class _editingMenuState extends State<editingMenu> {
               color: Colors.white,
             ),
             onPressed: () {
-                Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));
+              Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));
             },
           )
         ],
       ),
+
       body: Container(
         child: ListView(
           children: List.generate(
@@ -47,7 +57,7 @@ class _editingMenuState extends State<editingMenu> {
                     ),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: ListTile(
+                    child: ListTile(//showing list of foods
                       title: Text(foodS.getFoods().elementAt(index).getname(),
                       style: TextStyle(
                         fontSize: 16,
@@ -56,17 +66,41 @@ class _editingMenuState extends State<editingMenu> {
                         subtitle: Text(foodS.getFoods().elementAt(index).getdescription()+"\n"+"قیمت: "+foodS.getFoods().elementAt(index).getprice(),
                         style: TextStyle(
                             color: Colors.blueGrey,
+
                           fontSize: 14,
                         ),),
                       leading: ConstrainedBox(
                         constraints: BoxConstraints(
                           minWidth: 100,
-                          minHeight: 100,
+                          minHeight: 100,//changing size of the image
                           maxWidth: 200,
                           maxHeight: 200,
                         ),
+
                         child: Image.asset(_showPic(foodS.getFoods().elementAt(index)), fit: BoxFit.cover),
                       ),
+                          trailing:GestureDetector(
+                            child:  Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.purpleAccent,
+
+                                  width: 3,
+                                ),
+                              ),
+
+                              height: MediaQuery.of(context).size.height/20,
+                              width: MediaQuery.of(context).size.width/4,
+                              child: Center(
+                                child: Text("مشاهده جزئیات"),
+                              ),
+                            ),
+                            onTap: (){
+                              setState(() {
+                               Navigator.push(context, new MaterialPageRoute(builder: (context) => details(change,index)));
+                              });
+                            },
+                          ),
                           //icon hay zaheri ye widget migigre
 
 

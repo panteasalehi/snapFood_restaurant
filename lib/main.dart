@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap/addUser.dart';
-import 'package:snap/editingMenu.dart';
+import 'package:snap/details.dart';
 import 'package:snap/foodS.dart';
 import 'package:snap/myfood.dart';
 
+import 'editingMenu.dart';
 import 'logIn.dart';
 
 void main() {
@@ -14,6 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -101,3 +103,4 @@ return Scaffold(
  
   
 }
+

@@ -5,7 +5,7 @@ class foodS{
   static void addFood(myfood s){
     myfoods.add(s);
   }
-  static List<myfood> getFoods(){
+   static List<myfood> getFoods(){
     return myfoods;
   }
 
