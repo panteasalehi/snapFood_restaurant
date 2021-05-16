@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snap/SearchDemo.dart';
 import 'package:snap/addFood.dart';
 import 'package:snap/choosePhoto.dart';
 import 'package:snap/details.dart';
@@ -57,6 +58,16 @@ delete(String name){
                   ),
                   onPressed: () {
                     Navigator.push(context,new MaterialPageRoute(builder: (context) => Remove(delete)));//deleting food
+                  },
+
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.greenAccent,
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,new MaterialPageRoute(builder: (context) => MyHomePage1()));//deleting food
                   },
 
                 )
