@@ -16,19 +16,19 @@ class editingMenu extends StatefulWidget {
 }
 
 class _editingMenuState extends State<editingMenu> {
-
-change(int number,String name , String p, String d){//this is the function for changing the food
-  foodS.getFoods().elementAt(number).description=d;
-  foodS.getFoods().elementAt(number).price=p;
-  foodS.getFoods().elementAt(number).name=name;
-}
-delete(String name){
-
-  for(int i = 0 ; i< foodS.getFoods().length;i++){
-    if(name == foodS.getFoods().elementAt(i).name)
-      foodS.removeFood(foodS.getFoods().elementAt(i));
+  bool isSwitched = false;
+  change(int number,String name , String p, String d){//this is the function for changing the food
+    foodS.getFoods().elementAt(number).description=d;
+    foodS.getFoods().elementAt(number).price=p;
+    foodS.getFoods().elementAt(number).name=name;
   }
-}
+  delete(String name){
+
+    for(int i = 0 ; i< foodS.getFoods().length;i++){
+      if(name == foodS.getFoods().elementAt(i).name)
+        foodS.removeFood(foodS.getFoods().elementAt(i));
+    }
+  }
   @override
 
   Widget build(BuildContext context) {
@@ -40,38 +40,38 @@ delete(String name){
         title: Text('My App'),
         actions: <Widget>[
           Row(
-              children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.local_pizza_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
-                  },
-
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.local_pizza_outlined,
+                  color: Colors.white,
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.greenAccent,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,new MaterialPageRoute(builder: (context) => Remove(delete)));//deleting food
-                  },
+                onPressed: () {
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
+                },
 
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.greenAccent,
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.greenAccent,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,new MaterialPageRoute(builder: (context) => MyHomePage1()));//deleting food
-                  },
+                onPressed: () {
+                  Navigator.push(context,new MaterialPageRoute(builder: (context) => Remove(delete)));//deleting food
+                },
 
-                )
-              ],
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.greenAccent,
+                ),
+                onPressed: () {
+                  Navigator.push(context,new MaterialPageRoute(builder: (context) => MyHomePage1()));//deleting food
+                },
+
+              )
+            ],
           ),
 
 
@@ -80,29 +80,31 @@ delete(String name){
       ),
 
       body: Container(
-        child: ListView(
-          children: List.generate(
-            foodS.getFoods().length,
-                (index) {
+          child: ListView(
+            children: List.generate(
+                foodS.getFoods().length,
+                    (index) {
+                  bool switched=false;
+                  bool l = false;
                   return Container(
                     margin: EdgeInsets.all(5),
                     decoration:  BoxDecoration(
                       border: Border.all(
-                      color: Colors.purple,
-                      width: 2,
+                        color: Colors.purple,
+                        width: 2,
 
-                    ),
+                      ),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: ListTile(//showing list of foods
                       title: Text(foodS.getFoods().elementAt(index).getname(),
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                      ),
-                        subtitle: Text(foodS.getFoods().elementAt(index).getdescription()+"\n"+"قیمت: "+foodS.getFoods().elementAt(index).getprice(),
                         style: TextStyle(
-                            color: Colors.blueGrey,
+                          fontSize: 16,
+                        ),
+                      ),
+                      subtitle: Text(foodS.getFoods().elementAt(index).getdescription()+"\n"+"قیمت: "+foodS.getFoods().elementAt(index).getprice(),
+                        style: TextStyle(
+                          color: Colors.blueGrey,
 
                           fontSize: 14,
                         ),),
@@ -116,7 +118,10 @@ delete(String name){
 
                         child: Image.asset(_showPic(foodS.getFoods().elementAt(index)), fit: BoxFit.cover),
                       ),
-                          trailing:GestureDetector(
+                      trailing:Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
                             child:  Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -134,11 +139,23 @@ delete(String name){
                             ),
                             onTap: (){
                               setState(() {
-                               Navigator.push(context, new MaterialPageRoute(builder: (context) => details(change,index)));//this will pass the number of the food we want to change as index
+                                Navigator.push(context, new MaterialPageRoute(builder: (context) => details(change,index)));//this will pass the number of the food we want to change as index
                               });
                             },
                           ),
-                          //icon hay zaheri ye widget migigre
+                          Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
+                            },
+                            activeTrackColor: Colors.yellow,
+                            activeColor: Colors.orangeAccent,
+                          ),
+                        ],
+                      ),
+                      //icon hay zaheri ye widget migigre
 
 
                     ),
@@ -147,15 +164,16 @@ delete(String name){
                   );
 
                 }
-          ),
-        )
+            ),
+
+          )
       ),
 
     );
   }
 }
- String _showPic(myfood f){
+String _showPic(myfood f){
   //if(!f.hasPic)
-    return "snapfoodPic/images (3).jpeg";
+  return "snapfoodPic/images (3).jpeg";
   return f.picAdd;
 }

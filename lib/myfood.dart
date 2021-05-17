@@ -7,10 +7,10 @@ class myfood{
   String picAdd;
   myfood( String name , String price,bool state,String description , bool hasPic){
     this.name =  name;
-   this.price = price;
-   this.state = state;
-   this.description = description;
-   this.hasPic = hasPic;
+    this.price = price;
+    this.state = state;
+    this.description = description;
+    this.hasPic = hasPic;
   }
   String getname (){
     return name;
