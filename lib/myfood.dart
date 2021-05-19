@@ -1,14 +1,13 @@
 class myfood{
   String name;
   String price;
-  bool state;
+
   String description;
   bool hasPic;
   String picAdd;
-  myfood( String name , String price,bool state,String description , bool hasPic){
+  myfood( String name , String price,String description , bool hasPic){
     this.name =  name;
     this.price = price;
-    this.state = state;
     this.description = description;
     this.hasPic = hasPic;
   }
@@ -23,9 +22,6 @@ class myfood{
   }
   String getdescription (){
     return description;
-  }
-  bool getstate(){
-    return state;
   }
 
 }

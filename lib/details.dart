@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snap/editingMenu.dart';
+import 'package:snap/edit.dart';
 import 'package:snap/foodS.dart';
+
+import 'edit.dart';
 //page 2
 class details extends StatefulWidget {
   Function change;
@@ -63,7 +65,7 @@ String Nname,Nprice,Ndescription;//the new names that we want have
                                     onPressed: () {
                                       setState(() {
                                         widget.change(widget.num,Nname,Nprice,Ndescription);//when we call this function it will made the changes we want in the editing menu
-                                       Navigator.push(context, new MaterialPageRoute(builder: (context) => editingMenu()));//going back and seeing result
+                                       Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));//going back and seeing result
                                       });
                                     },
                                   ),

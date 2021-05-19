@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snap/editingMenu.dart';
+import 'package:snap/edit.dart';
 import 'package:snap/myfood.dart';
 
 import 'foodS.dart';
@@ -11,9 +11,8 @@ class addFood extends StatefulWidget {
 class _addFoodState extends State<addFood> {
   String name;
   String price;
-  bool state;
   String description;
-  bool hasPic;
+  bool hasPic=false;
   var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -59,23 +58,7 @@ class _addFoodState extends State<addFood> {
                   hintText:"enter your food`s price",
                 ),
               ),
-              TextFormField(
-                onSaved: (String value) {
-                  if(value=="1")
-                    state = true;
-                  else
-                    state = false;
-                },
-                validator: (String value){
-                  if(value != "1" && value != "2")
-                    return "enter 1 or 2 please";
-                    return null;
 
-                },
-                decoration: InputDecoration(
-                  hintText:"is your food available? 1_yes 2_no",
-                ),
-              ),
               ElevatedButton(
                 child: Text("save!"),
                 onPressed: (){
@@ -83,8 +66,8 @@ class _addFoodState extends State<addFood> {
                     setState(() {
                       _formKey.currentState.save();
                       setState(() {
-                        foodS.addFood(new myfood(name, price, state, description, hasPic));
-                      Navigator.push(context, new MaterialPageRoute(builder: (context) => editingMenu()));
+                        foodS.addFood(new myfood(name, price, description, hasPic));
+                      Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));
                       },
                       );
 

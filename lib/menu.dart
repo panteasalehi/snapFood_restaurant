@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snap/choosePhoto.dart';
-import 'package:snap/editingMenu.dart';
+import 'package:snap/report.dart';
+import 'package:snap/suggestions.dart';
 class menu extends StatefulWidget {
   @override
   _menuState createState() => _menuState();
@@ -46,7 +46,7 @@ class _menuState extends State<menu> {
               GestureDetector(
                 child:  _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
                 onTap: (){
-
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => MyStatefulWidget()));
                 },
               ),
               Spacer(),

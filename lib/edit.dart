@@ -1,21 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snap/SearchDemo.dart';
-import 'package:snap/addFood.dart';
-import 'package:snap/choosePhoto.dart';
+import 'package:snap/foodS.dart';
+import 'package:snap/myfood.dart';
 import 'package:snap/details.dart';
-import 'Remove.dart';
-import 'foodS.dart';
-import 'myfood.dart';
-import 'package:snap/main.dart';
-//first page
-class editingMenu extends StatefulWidget {
 
+import 'Remove.dart';
+import 'addFood.dart';
+class editing extends StatefulWidget {
   @override
-  _editingMenuState createState() => _editingMenuState();
+  _editingState createState() => _editingState();
 }
 
-class _editingMenuState extends State<editingMenu> {
+class _editingState extends State<editing> {
+  @override
   bool isSwitched = false;
   change(int number,String name , String p, String d){//this is the function for changing the food
     foodS.getFoods().elementAt(number).description=d;
@@ -23,11 +20,14 @@ class _editingMenuState extends State<editingMenu> {
     foodS.getFoods().elementAt(number).name=name;
   }
   delete(String name){
-
     for(int i = 0 ; i< foodS.getFoods().length;i++){
       if(name == foodS.getFoods().elementAt(i).name)
         foodS.removeFood(foodS.getFoods().elementAt(i));
     }
+    var value = isSwitched;
+    setState(() {
+      isSwitched = value;//the food could not be deleted until the switch was not change :|
+    });
   }
   @override
 
@@ -150,8 +150,8 @@ class _editingMenuState extends State<editingMenu> {
                                 isSwitched = value;
                               });
                             },
-                            activeTrackColor: Colors.yellow,
-                            activeColor: Colors.orangeAccent,
+                            activeTrackColor: Colors.greenAccent,
+                            activeColor: Colors.green,
                           ),
                         ],
                       ),

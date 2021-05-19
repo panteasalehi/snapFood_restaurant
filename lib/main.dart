@@ -4,15 +4,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap/Remove.dart';
 import 'package:snap/addUser.dart';
+import 'package:snap/clientList.dart';
 import 'package:snap/details.dart';
+import 'package:snap/edit.dart';
 import 'package:snap/foodS.dart';
 import 'package:snap/myfood.dart';
-
-import 'editingMenu.dart';
+import 'customer.dart';
 import 'logIn.dart';
-
+String foodName;
+String code;
+String customerName;
+String date;
+bool State;
+int cost;
 void main() {
-  runApp(MyApp());
+
+  clientList.addCustomer(Customer(
+    "pizza",
+    "23456",
+    "user1",
+    "12/12/1400",
+    false,
+    120,
+  ));
+  clientList.addCustomer(Customer(
+    "rice",
+    "23456",
+    "user2",
+    "12/12/1400",
+    true,
+    78,
+  ));
+ runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "main": (context) => addUser(),
-        "/menu": (context) => editingMenu(),
+        "/menu": (context) => editing(),
       },
       title: 'Snap food!',
       theme: ThemeData(
