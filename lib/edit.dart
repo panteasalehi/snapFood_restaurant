@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:snap/SearchDemo.dart';
+import 'package:snap/addPhoto.dart';
 import 'package:snap/foodS.dart';
 import 'package:snap/myfood.dart';
 import 'package:snap/details.dart';
@@ -14,12 +18,27 @@ class editing extends StatefulWidget {
 class _editingState extends State<editing> {
   @override
   bool isSwitched = false;
+  final picker = ImagePicker();
+  Future getImage(int num) async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        foodS.getFoods().elementAt(num).image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+
+    });
+  }
+
   change(int number,String name , String p, String d){//this is the function for changing the food
     foodS.getFoods().elementAt(number).description=d;
     foodS.getFoods().elementAt(number).price=p;
     foodS.getFoods().elementAt(number).name=name;
   }
   delete(String name){
+
     for(int i = 0 ; i< foodS.getFoods().length;i++){
       if(name == foodS.getFoods().elementAt(i).name)
         foodS.removeFood(foodS.getFoods().elementAt(i));
@@ -32,6 +51,7 @@ class _editingState extends State<editing> {
   @override
 
   Widget build(BuildContext context) {
+
 
     int index = ModalRoute.of(context).settings.arguments as int;
     return Scaffold(
@@ -70,7 +90,8 @@ class _editingState extends State<editing> {
                   Navigator.push(context,new MaterialPageRoute(builder: (context) => MyHomePage1()));//deleting food
                 },
 
-              )
+              ),
+
             ],
           ),
 
@@ -84,8 +105,6 @@ class _editingState extends State<editing> {
             children: List.generate(
                 foodS.getFoods().length,
                     (index) {
-                  bool switched=false;
-                  bool l = false;
                   return Container(
                     margin: EdgeInsets.all(5),
                     decoration:  BoxDecoration(
@@ -108,19 +127,24 @@ class _editingState extends State<editing> {
 
                           fontSize: 14,
                         ),),
-                      leading: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minWidth: 100,
-                          minHeight: 100,//changing size of the image
-                          maxWidth: 200,
-                          maxHeight: 200,
-                        ),
 
-                        child: Image.asset(_showPic(foodS.getFoods().elementAt(index)), fit: BoxFit.cover),
-                      ),
                       trailing:Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          GestureDetector(
+                            child:  Container(
+                              height: MediaQuery.of(context).size.height/30,
+                              width: MediaQuery.of(context).size.width/12,
+                              child: Center(
+                                child: Text("pic"),
+                              ),
+                            ),
+                            onTap: (){
+                              setState(() {
+                                Navigator.push(context, new MaterialPageRoute(builder: (context) => addPhoto(getImage,index)));
+                              });
+                            },
+                          ),
                           GestureDetector(
                             child:  Container(
                               decoration: BoxDecoration(
@@ -131,10 +155,10 @@ class _editingState extends State<editing> {
                                 ),
                               ),
 
-                              height: MediaQuery.of(context).size.height/20,
-                              width: MediaQuery.of(context).size.width/4,
+                              height: MediaQuery.of(context).size.height/24,
+                              width: MediaQuery.of(context).size.width/6,
                               child: Center(
-                                child: Text("مشاهده جزئیات"),
+                                child: Text("جزئیات"),
                               ),
                             ),
                             onTap: (){
@@ -144,10 +168,10 @@ class _editingState extends State<editing> {
                             },
                           ),
                           Switch(
-                            value: isSwitched,
+                            value: foodS.getFoods().elementAt(index).state,
                             onChanged: (value) {
                               setState(() {
-                                isSwitched = value;
+                               foodS.getFoods().elementAt(index).state = value;
                               });
                             },
                             activeTrackColor: Colors.greenAccent,
@@ -155,6 +179,9 @@ class _editingState extends State<editing> {
                           ),
                         ],
                       ),
+                      leading: foodS.getFoods().elementAt(index).image == null
+                        ? Image.asset("snapfoodPic/images (3).jpeg")
+                        : Image.file(foodS.getFoods().elementAt(index).image),
                       //icon hay zaheri ye widget migigre
 
 
@@ -171,9 +198,4 @@ class _editingState extends State<editing> {
 
     );
   }
-}
-String _showPic(myfood f){
-  //if(!f.hasPic)
-  return "snapfoodPic/images (3).jpeg";
-  return f.picAdd;
 }

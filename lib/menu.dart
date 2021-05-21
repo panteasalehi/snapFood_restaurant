@@ -29,39 +29,6 @@ class _menuState extends State<menu> {
                   Navigator.pushNamed(context, "/menu" , arguments: index);
                 },
               ),
-
-              Spacer(),
-              GestureDetector(
-                child: _choice(context, "snapfoodPic/download.jfif", "adding photo"),
-                onTap: (){
-
-                },
-              ),
-              Spacer(),
-            ],
-          ),
-          Row(
-            children: [
-              Spacer(),
-              GestureDetector(
-                child:  _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
-                onTap: (){
-                  Navigator.push(context, new MaterialPageRoute(builder: (context) => MyStatefulWidget()));
-                },
-              ),
-              Spacer(),
-              GestureDetector(
-                child:  _choice(context, "snapfoodPic/images (2).jfif", "History"),
-                onTap: (){
-
-                },
-              ),
-
-              Spacer(),
-            ],
-          ),
-          Row(
-            children: [
               Spacer(),
               GestureDetector(
                 child: _choice(context, "snapfoodPic/images (1).jfif", "accounting"),
@@ -73,6 +40,27 @@ class _menuState extends State<menu> {
               Spacer(),
             ],
           ),
+          Row(
+            children: [
+              Spacer(),
+              GestureDetector(
+                child:  _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
+                onTap: (){
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => suggest()));
+                },
+              ),
+              Spacer(),
+              GestureDetector(
+                child:  _choice(context, "snapfoodPic/images (2).jfif", "History"),
+                onTap: (){
+                  Navigator.push(context, new MaterialPageRoute(builder: (context) => MyStatefulWidget()));
+                },
+              ),
+
+              Spacer(),
+            ],
+          ),
+
 
         ],
       ),

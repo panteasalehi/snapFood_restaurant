@@ -15,6 +15,9 @@ class _addUserState extends State<addUser> {
   String type;
   String phoneNumber;
   String password;
+  bool isSeaFood;
+  bool isFastFood;
+  bool home;
   @override
   Widget build(BuildContext context) {
 
@@ -42,14 +45,43 @@ class _addUserState extends State<addUser> {
                   address= value;
                 },
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText:"enter the type of food",
-                ),
-                onSaved: (String value) {
+              Row(
+                children: [
+                  Text("choose your food type"),
+                  Spacer(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.fastfood_rounded,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                     isFastFood = true;
+                    },
 
-                  type= value;
-                },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.beach_access,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      isSeaFood = true;
+                    },
+
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.home,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      home = true;
+                    },
+
+                  ),
+                  Spacer(),
+
+                ],
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -87,7 +119,7 @@ class _addUserState extends State<addUser> {
                   if (_formKey.currentState.validate()) {
                     setState(() {
                       _formKey.currentState.save();
-                      users.addUser(signUp(name, address, type, phoneNumber, password));
+                      users.addUser(signUp(name, address, phoneNumber, password,isSeaFood,home,isFastFood));
                       Navigator.push(context, new MaterialPageRoute(builder: (context) => menu()));//ba botton shit msl ye safhe barkhord mikone
                     });
 

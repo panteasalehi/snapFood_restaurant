@@ -12,7 +12,12 @@ class _addFoodState extends State<addFood> {
   String name;
   String price;
   String description;
-  bool hasPic=false;
+  bool isFastFood;
+  bool isSeaFood;
+  bool home;
+  static List<myfood> seaFoodS = List.empty(growable: true);
+  static List<myfood> fastFoodS = List.empty(growable: true);
+  static List<myfood> homeFoodS = List.empty(growable: true);
   var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -33,14 +38,6 @@ class _addFoodState extends State<addFood> {
               ),
 
               TextFormField(
-                onSaved: (String value) {
-                  price= value;
-                },
-                decoration: InputDecoration(
-                  hintText:"enter your food`s photo address",
-                ),
-              ),
-              TextFormField(
                 decoration: InputDecoration(
                   hintText:"enter your food name",
                 ),
@@ -58,7 +55,44 @@ class _addFoodState extends State<addFood> {
                   hintText:"enter your food`s price",
                 ),
               ),
+              Row(
+                children: [
+                  Text("choose your food type"),
+                  Spacer(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.fastfood_rounded,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      isFastFood = true;
+                    },
 
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.beach_access,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      isSeaFood = true;
+                    },
+
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.home,
+                      color: Colors.greenAccent,
+                    ),
+                    onPressed: () {
+                      home = true;
+                    },
+
+                  ),
+                  Spacer(),
+
+                ],
+              ),
               ElevatedButton(
                 child: Text("save!"),
                 onPressed: (){
@@ -66,8 +100,15 @@ class _addFoodState extends State<addFood> {
                     setState(() {
                       _formKey.currentState.save();
                       setState(() {
-                        foodS.addFood(new myfood(name, price, description, hasPic));
-                      Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));
+                        if(isSeaFood)
+                          seaFoodS.add(new myfood(name, price, description));
+                        if(isFastFood)
+                          fastFoodS.add(new myfood(name, price, description));
+                        if(home)
+                          homeFoodS.add(new myfood(name, price, description));
+
+                          foodS.addFood(new myfood(name, price, description));
+                          Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));
                       },
                       );
 

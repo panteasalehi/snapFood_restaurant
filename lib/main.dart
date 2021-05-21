@@ -82,7 +82,7 @@ class MyHomePage extends StatelessWidget {
 double height = MediaQuery.of(context).size.height;
 
 return Scaffold(
-
+backgroundColor: Colors.white54,//should be lighter
       body: SingleChildScrollView(
 
           child: Column(
