@@ -120,7 +120,7 @@ class _addUserState extends State<addUser> {
                     setState(() {
                       _formKey.currentState.save();
                       users.addUser(signUp(name, address, phoneNumber, password,isSeaFood,home,isFastFood));
-                      Navigator.push(context, new MaterialPageRoute(builder: (context) => menu()));//ba botton shit msl ye safhe barkhord mikone
+                      Navigator.pushNamed(context,"/go",arguments: users.getUsers().length-1);//ba botton shit msl ye safhe barkhord mikone
                     });
 
                   }

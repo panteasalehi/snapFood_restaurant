@@ -8,8 +8,10 @@ import 'package:snap/clientList.dart';
 import 'package:snap/details.dart';
 import 'package:snap/edit.dart';
 import 'package:snap/foodS.dart';
+import 'package:snap/menu.dart';
 import 'package:snap/myfood.dart';
 import 'customer.dart';
+import 'location.dart';
 import 'logIn.dart';
 String foodName;
 String code;
@@ -48,6 +50,9 @@ class MyApp extends StatelessWidget {
       routes: {
         "main": (context) => addUser(),
         "/menu": (context) => editing(),
+        "/earth": (context) => Location(),
+        "/go": (context) => menu(),
+
       },
       title: 'Snap food!',
       theme: ThemeData(
@@ -82,9 +87,8 @@ class MyHomePage extends StatelessWidget {
 double height = MediaQuery.of(context).size.height;
 
 return Scaffold(
-backgroundColor: Colors.white54,//should be lighter
+  backgroundColor: const Color.fromARGB(244,255, 248, 246 ),
       body: SingleChildScrollView(
-
           child: Column(
 
         children: [

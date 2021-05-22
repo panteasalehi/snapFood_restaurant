@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snap/report.dart';
 import 'package:snap/suggestions.dart';
+
+import 'location.dart';
 class menu extends StatefulWidget {
   @override
   _menuState createState() => _menuState();
@@ -31,9 +33,10 @@ class _menuState extends State<menu> {
               ),
               Spacer(),
               GestureDetector(
-                child: _choice(context, "snapfoodPic/images (1).jfif", "accounting"),
+                child: _choice(context, "snapfoodPic/images (3).jfif", "location"),
                 onTap: (){
-
+                  print(index);
+                    Navigator.pushNamed(context, "/earth" ,arguments: index);
                 },
               ),
 

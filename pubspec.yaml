@@ -31,6 +31,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   image_picker: ^0.7.5+2
+  map: ^0.3.0
+  cached_network_image: ^3.0.0
+
+
 
 
   
@@ -61,6 +65,7 @@ flutter:
       - snapfoodPic/images (2).jfif
       - snapfoodPic/1976684.jpg
       - snapfoodPic/images (3).jpeg
+      - snapfoodPic/images (3).jfif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

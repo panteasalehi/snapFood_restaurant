@@ -6,6 +6,8 @@ class signUp{
   bool home;
   String phoneNumber;
   String password;
+  double latitude;
+  double longitude;
   signUp(String name,String address, String phoneNumber , String password ,bool sea , bool home , bool fastfood){
     this.name = name;
     this.address = address;
