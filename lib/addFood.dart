@@ -12,9 +12,9 @@ class _addFoodState extends State<addFood> {
   String name;
   String price;
   String description;
-  bool isFastFood;
-  bool isSeaFood;
-  bool home;
+  bool isFastFood=false;
+  bool isSeaFood=false;
+  bool home=false;
   static List<myfood> seaFoodS = List.empty(growable: true);
   static List<myfood> fastFoodS = List.empty(growable: true);
   static List<myfood> homeFoodS = List.empty(growable: true);

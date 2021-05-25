@@ -87,8 +87,8 @@ class _LocationState extends State<Location> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
 
-        //  users.getUsers().elementAt(index).longitude = controller.center.longitude;
-          //users.getUsers().elementAt(index).latitude = controller.center.longitude;
+         users.getUsers().elementAt(index).longitude = controller.center.longitude;
+          users.getUsers().elementAt(index).latitude = controller.center.longitude;
           Navigator.pop(context);
         },
         tooltip: 'add location',
