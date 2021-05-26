@@ -95,6 +95,8 @@ class _addUserState extends State<addUser> {
                     if(value == users.myUsers[i].phoneNumber)
                       return "enter another phone number";
                   }
+                  if(value.length<3)
+                    return "your phone number is not true";
                   return null;
                 },
 

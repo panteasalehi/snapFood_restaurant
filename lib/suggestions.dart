@@ -18,6 +18,7 @@ class _suggestState extends State<suggest> {
     mySuggestoin.SuggestionList.length,
     (index) {
       return Container(
+
         margin: EdgeInsets.all(5),
         decoration:  BoxDecoration(
           border: Border.all(
@@ -27,20 +28,25 @@ class _suggestState extends State<suggest> {
           ),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: ListTile(
-          title: Text(mySuggestoin.SuggestionList.elementAt(index)),
-          subtitle: TextFormField(
-            decoration: InputDecoration(
-              hintText:"enter your answer",
-            ),
-            onSaved: (String value) {
-             ans=value;
-            },
+        child: Form(
 
+          child: ListTile(
+              title: Text(mySuggestoin.SuggestionList.elementAt(index)),
+            subtitle: TextFormField(
+              decoration: InputDecoration(
+                hintText:"enter your answer",
+              ),
+              onSaved: (String value) {
+               ans=value;
+              },
+
+
+            ),
+             leading: FlatButton(onPressed: (){
+               mySuggestoin.answerList.add(ans);
+
+             },child: Text("send"),color: Colors.greenAccent)
           ),
-           leading: FlatButton(onPressed: (){
-             mySuggestoin.answerList.add(ans);
-           },child: Text("send"),color: Colors.greenAccent)
         ),
 
       );
