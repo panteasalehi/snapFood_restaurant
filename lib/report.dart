@@ -33,6 +33,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              //showing them in a row caused bug so they have been shown in two row
+              //should be corrected
               Row(
                 children: [
                   DataTable(//several datatable is used in order to have several column and rows

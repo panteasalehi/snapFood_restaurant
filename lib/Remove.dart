@@ -14,6 +14,7 @@ class _RemoveState extends State<Remove> {
   @override
   Widget build(BuildContext context) {
     int index = ModalRoute.of(context).settings.arguments as int;
+    //just removing an element and calling a function nothing especial
     return Scaffold(
       body: Center(
         child: ListView(

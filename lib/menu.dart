@@ -21,7 +21,7 @@ class _menuState extends State<menu> {
       child: ListView(
         children: [
           Padding(padding: EdgeInsets.fromLTRB(0, 70, 0, 0)),
-
+          //menu page containing photo and navigating to other pages
           Row(
             children: [
               Spacer(),

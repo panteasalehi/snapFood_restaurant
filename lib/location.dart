@@ -89,6 +89,7 @@ class _LocationState extends State<Location> {
 
          users.getUsers().elementAt(index).longitude = controller.center.longitude;
           users.getUsers().elementAt(index).latitude = controller.center.longitude;
+          //here i add the address of the user
           Navigator.pop(context);
         },
         tooltip: 'add location',

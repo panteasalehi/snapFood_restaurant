@@ -20,7 +20,7 @@ String date;
 bool State;
 int cost;
 void main() {
-
+//making some users to show in history
   clientList.addCustomer(Customer(
     "pizza",
     "23456",
@@ -29,6 +29,7 @@ void main() {
     false,
     120,
   ));
+//making some users to show in history
   clientList.addCustomer(Customer(
     "rice",
     "23456",
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       routes: {
+        //navigating to a page
         "main": (context) => addUser(),
         "/menu": (context) => editing(),
         "/earth": (context) => Location(),

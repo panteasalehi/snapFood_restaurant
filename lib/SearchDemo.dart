@@ -14,9 +14,10 @@ class MyHomePage1 extends StatefulWidget {
 
 class _MyHomePage1State extends State<MyHomePage1> {
   TextEditingController editingController = TextEditingController();
-
+//making the list first element is the length of the list and the second is the function we use for searching
+  //here searching is based on the names so "getname" is used
   final duplicateItems = List<String>.generate(foodS.getFoods().length, (i) => foodS.getFoods().elementAt(i).getname() );
-  var items = List<String>();
+  var items = List<String>();//a new list above list will be added to it
   @override
   void initState() {
     items.addAll(duplicateItems);
@@ -30,6 +31,9 @@ class _MyHomePage1State extends State<MyHomePage1> {
     if(query.isNotEmpty) {
       List<String> dummyListData = List<String>();
       dummySearchList.forEach((item) {
+        //here is where the search filter happens it cheak and add only items that contains query
+        //for example if the query be  h, only items which have h would be added
+        //later in setstate this change will be shown
         if(item.contains(query)) {
           dummyListData.add(item);
         }
@@ -60,6 +64,7 @@ class _MyHomePage1State extends State<MyHomePage1> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                //here is where you type what you want and it would be filtered
                 onChanged: (value) {
                   filterSearchResults(value);
                 },
@@ -77,7 +82,7 @@ class _MyHomePage1State extends State<MyHomePage1> {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                  title: Text('${items[index]}'),
+                    title: Text('${items[index]}'),
                   );
                 },
               ),

@@ -32,15 +32,15 @@ class _suggestState extends State<suggest> {
 
           child: ListTile(
               title: Text(mySuggestoin.SuggestionList.elementAt(index)),
+            //a simple textform field for answering
             subtitle: TextFormField(
               decoration: InputDecoration(
                 hintText:"enter your answer",
               ),
-              onSaved: (String value) {
+              onChanged: (String value) {
                ans=value;
               },
-
-
+              //onchanged will save the answer later we will use to send it
             ),
              leading: FlatButton(onPressed: (){
                mySuggestoin.answerList.add(ans);

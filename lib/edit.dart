@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:snap/SearchDemo.dart';
 import 'package:snap/addPhoto.dart';
 import 'package:snap/foodS.dart';
+import 'package:snap/menu.dart';
 import 'package:snap/myfood.dart';
 import 'package:snap/details.dart';
 
@@ -91,7 +92,16 @@ class _editingState extends State<editing> {
                 },
 
               ),
+              IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios_outlined,
+                  color: Colors.greenAccent,
+                ),
+                onPressed: () {
+                  Navigator.push(context,new MaterialPageRoute(builder: (context) => menu()));//deleting food
+                },
 
+              ),
             ],
           ),
 
