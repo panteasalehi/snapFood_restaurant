@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:snap/menu.dart';
 import 'package:snap/signUp.dart';
@@ -18,6 +20,8 @@ class _addUserState extends State<addUser> {
   bool isSeaFood;
   bool isFastFood;
   bool home;
+  List<String> saver = List.empty(growable: true);
+  String user = "";
   @override
   Widget build(BuildContext context) {
 
@@ -32,7 +36,7 @@ class _addUserState extends State<addUser> {
                   hintText: "enter your name",
                 ),
 
-                onSaved: (String value) {
+                onChanged: (String value) {
                   name= value;
                 },
 
@@ -41,7 +45,7 @@ class _addUserState extends State<addUser> {
                 decoration: InputDecoration(
                   hintText:"enter your address",
                 ),
-                onSaved: (String value) {
+                onChanged: (String value) {
                   address= value;
                 },
               ),
@@ -87,7 +91,7 @@ class _addUserState extends State<addUser> {
                 decoration: InputDecoration(
                   hintText:"enter your phone number",
                 ),
-                onSaved: (String value) {
+                onChanged: (String value) {
                   phoneNumber= value;
                 },
                 validator: (String value){
@@ -102,8 +106,10 @@ class _addUserState extends State<addUser> {
 
               ),
               TextFormField(
-                onSaved: (String value) {
+                onChanged: (String value) {
+                  saver.add("the String is:"+value);
                   password= value;
+
                 },
 
                 validator: (String value){
@@ -120,7 +126,15 @@ class _addUserState extends State<addUser> {
                 onPressed: (){
                   if (_formKey.currentState.validate()) {
                     setState(() {
+                      user+="the String is" + name;
+                      user+="the String is" + address;
+                      user+="the String is" + isFastFood.toString();
+                      user+="the String is" + isSeaFood.toString();
+                      user+="the String is" + home.toString();
+                      user+="the String is" + phoneNumber;
+                      user+="the String is" + password;
                       _formKey.currentState.save();
+                      Send(user);
                       users.addUser(signUp(name, address, phoneNumber, password,isSeaFood,home,isFastFood));
                       Navigator.pushNamed(context,"/go",arguments: users.getUsers().length-1);//ba botton shit msl ye safhe barkhord mikone
                     });
@@ -128,7 +142,6 @@ class _addUserState extends State<addUser> {
                   }
                 },
               ),
-
 
             ],
 
@@ -139,6 +152,22 @@ class _addUserState extends State<addUser> {
       ),
 
     );
+
+  }
+
+  void Send(String str) async{
+    await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+      print('connected');
+      String signUp = "the String is:signup";
+      signUp+=str;
+      serverSocket.writeln(signUp);
+      serverSocket.listen((socket) {
+        String show = String.fromCharCodes(socket).trim();
+        print(show);
+        setState(() {
+        });
+      });
+
+    });
   }
 }
-
