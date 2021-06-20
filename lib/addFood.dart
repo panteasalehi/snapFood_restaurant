@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap/edit.dart';
 import 'package:snap/myfood.dart';
-
+import 'package:snap/users.dart';
 import 'foodS.dart';
 class addFood extends StatefulWidget {
   @override
@@ -15,12 +15,15 @@ class _addFoodState extends State<addFood> {
   bool isFastFood=false;
   bool isSeaFood=false;
   bool home=false;
+
   static List<myfood> seaFoodS = List.empty(growable: true);
   static List<myfood> fastFoodS = List.empty(growable: true);
   static List<myfood> homeFoodS = List.empty(growable: true);
   var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    int index = ModalRoute.of(context).settings.arguments as int;
+
     return Scaffold(
       body: Container(
         child: Form(
@@ -107,7 +110,7 @@ class _addFoodState extends State<addFood> {
                         if(home)
                           homeFoodS.add(new myfood(name, price, description));
 
-                          foodS.addFood(new myfood(name, price, description));
+                          foodS.addFood(new myfood(name, price, description),index);
                           Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));
                       },
                       );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
@@ -88,8 +90,12 @@ class _LocationState extends State<Location> {
         onPressed: () {
 
          users.getUsers().elementAt(index).longitude = controller.center.longitude;
-          users.getUsers().elementAt(index).latitude = controller.center.longitude;
-          //here i add the address of the user
+          users.getUsers().elementAt(index).latitude = controller.center.latitude;
+          String str = "the String is"+users.getUsers().elementAt(index).longitude.toString()+"the String is"+users.getUsers().elementAt(index).latitude.toString();
+          String str2 = "the String is"+ users.getUsers().elementAt(index).phoneNumber+"the String is"+users.getUsers().elementAt(index).password;
+          str += str2;
+          Send(str);
+          //here the address of the user is added
           Navigator.pop(context);
         },
         tooltip: 'add location',
@@ -97,4 +103,12 @@ class _LocationState extends State<Location> {
       ),
     );
   }
+}
+void Send(String str) async{
+  await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+    print('connected');
+    String location = "the String is:adding location";
+    location+=str;
+    serverSocket.writeln(location);
+  });
 }

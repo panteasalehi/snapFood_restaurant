@@ -1,15 +1,17 @@
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap/Remove.dart';
+import 'package:snap/Code.dart';
+import 'package:snap/addFood.dart';
 import 'package:snap/addUser.dart';
+import 'package:snap/signUp.dart';
+import 'package:snap/users.dart';
 import 'package:snap/clientList.dart';
-import 'package:snap/details.dart';
 import 'package:snap/edit.dart';
-import 'package:snap/foodS.dart';
 import 'package:snap/menu.dart';
-import 'package:snap/myfood.dart';
+import 'package:snap/suggestions.dart';
 import 'customer.dart';
 import 'location.dart';
 import 'logIn.dart';
@@ -38,6 +40,7 @@ void main() {
     true,
     78,
   ));
+Send();
  runApp(MyApp());
 }
 
@@ -54,7 +57,9 @@ class MyApp extends StatelessWidget {
         "/menu": (context) => editing(),
         "/earth": (context) => Location(),
         "/go": (context) => menu(),
-
+        "hell": (context) => addFood(),
+        "/code": (context) => Code(),
+        "/suggestions": (context) => suggestions(),
       },
       title: 'Snap food!',
       theme: ThemeData(
@@ -133,4 +138,32 @@ return Scaffold(
  
   
 }
+void Send() async{
+  await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+    print('connected');
+    serverSocket.writeln("the String is:start");
+    serverSocket.listen((socket) {
+      String show = String.fromCharCodes(socket).trim();
+       List<String> user = List.empty(growable: true);
+       user = show.split("\n");
+       for(int i = 0; i< user.length ;i+5) {
+         bool Fastfood , SeaFood , Home;
+         String name = user.elementAt(i);
+         String address = user.elementAt(i+1);
+         String foodType = user.elementAt(i+2);
+         String phone = user.elementAt(i+3);
+         String password = user.elementAt(i+4);
+         if(foodType.contains("fastfood"))
+           Fastfood = true;
+         else if(foodType.contains("seafood"))
+           SeaFood = true;
+         else
+           Home = true;
+           users.addUser(signUp(name, address, SeaFood, Home,Fastfood,phone,password));
+       }
+      //
+    //  print(show);
+    });
 
+  });
+}

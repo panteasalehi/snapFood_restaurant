@@ -16,6 +16,7 @@ class _menuState extends State<menu> {
   Widget build(BuildContext context) {
 
     int index = ModalRoute.of(context).settings.arguments as int;
+
     return Scaffold(
     body: Container(
       child: ListView(
@@ -49,7 +50,7 @@ class _menuState extends State<menu> {
               GestureDetector(
                 child:  _choice(context, "snapfoodPic/download (1).jfif", "suggestions"),
                 onTap: (){
-                  Navigator.push(context, new MaterialPageRoute(builder: (context) => suggest()));
+                  Navigator.pushNamed(context, "/suggestions" ,arguments: index);
                 },
               ),
               Spacer(),
@@ -60,6 +61,18 @@ class _menuState extends State<menu> {
                 },
               ),
 
+              Spacer(),
+            ],
+          ),
+          Row(
+            children: [
+              Spacer(),
+              GestureDetector(
+                child:  _choice(context, "snapfoodPic/download (1).jfif", "adding code"),
+                onTap: (){
+                  Navigator.pushNamed(context, "/code" ,arguments: index);
+                  },
+              ),
               Spacer(),
             ],
           ),

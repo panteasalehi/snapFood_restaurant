@@ -1,16 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:snap/SearchDemo.dart';
 import 'package:snap/addPhoto.dart';
 import 'package:snap/foodS.dart';
 import 'package:snap/menu.dart';
-import 'package:snap/myfood.dart';
 import 'package:snap/details.dart';
-
+import 'package:http/http.dart' as http;
 import 'Remove.dart';
-import 'addFood.dart';
 class editing extends StatefulWidget {
   @override
   _editingState createState() => _editingState();
@@ -52,9 +50,8 @@ class _editingState extends State<editing> {
   @override
 
   Widget build(BuildContext context) {
-
-
     int index = ModalRoute.of(context).settings.arguments as int;
+
     return Scaffold(
 
       appBar: AppBar(
@@ -68,7 +65,7 @@ class _editingState extends State<editing> {
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  Navigator.push(context, new MaterialPageRoute(builder: (context) => addFood()));//adding food
+                  Navigator.pushNamed(context,"hell",arguments: index);//adding food
                 },
 
               ),
@@ -151,8 +148,11 @@ class _editingState extends State<editing> {
                             ),
                             onTap: (){
                               setState(() {
+
+
                                 Navigator.push(context, new MaterialPageRoute(builder: (context) => addPhoto(getImage,index)));
                               });
+
                             },
                           ),
                           GestureDetector(

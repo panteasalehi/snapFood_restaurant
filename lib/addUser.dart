@@ -135,7 +135,7 @@ class _addUserState extends State<addUser> {
                       user+="the String is" + password;
                       _formKey.currentState.save();
                       Send(user);
-                      users.addUser(signUp(name, address, phoneNumber, password,isSeaFood,home,isFastFood));
+                      users.addUser(signUp(name, address,isSeaFood,home,isFastFood, phoneNumber, password));
                       Navigator.pushNamed(context,"/go",arguments: users.getUsers().length-1);//ba botton shit msl ye safhe barkhord mikone
                     });
 

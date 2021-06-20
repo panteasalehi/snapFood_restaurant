@@ -8,7 +8,7 @@ class signUp{
   String password;
   double latitude;
   double longitude;
-  signUp(String name,String address, String phoneNumber , String password ,bool sea , bool home , bool fastfood){
+  signUp(String name,String address ,bool sea , bool home , bool fastfood, String phoneNumber , String password){
     this.name = name;
     this.address = address;
     this.phoneNumber = phoneNumber;
