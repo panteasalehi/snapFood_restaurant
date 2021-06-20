@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap/Code.dart';
 import 'package:snap/addFood.dart';
+
 import 'package:snap/addUser.dart';
 import 'package:snap/signUp.dart';
 import 'package:snap/users.dart';

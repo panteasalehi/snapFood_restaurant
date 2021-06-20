@@ -3,9 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snap/report.dart';
-import 'package:snap/suggestions.dart';
 
-import 'location.dart';
 class menu extends StatefulWidget {
   @override
   _menuState createState() => _menuState();
@@ -25,6 +23,7 @@ class _menuState extends State<menu> {
           //menu page containing photo and navigating to other pages
           Row(
             children: [
+              
               Spacer(),
               GestureDetector(
                 child: _choice(context, "snapfoodPic/images.jfif", "editing menu"),
