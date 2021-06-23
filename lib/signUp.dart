@@ -8,6 +8,7 @@ class signUp{
   String password;
   double latitude;
   double longitude;
+  String distance;
   signUp(String name,String address ,bool sea , bool home , bool fastfood, String phoneNumber , String password){
     this.name = name;
     this.address = address;

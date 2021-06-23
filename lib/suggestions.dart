@@ -16,6 +16,23 @@ class _suggestionsState extends State<suggestions> {
     return Scaffold(
       appBar: AppBar(
         title: Text("comments"),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  String command = "the String isget suggestion" +"the String is"+users.getUsers().elementAt(number).phoneNumber;
+                 getSuggestions(command);
+                },
+
+              ),
+            ],
+          ),
+        ],
       ),
       body:  ListView(
         children: List.generate(
@@ -48,7 +65,7 @@ class _suggestionsState extends State<suggestions> {
                       ),
                       leading: FlatButton(onPressed: (){
                         mySuggestoin.answerList.add(ans);
-                        Send("str", index , number);
+                        SendAns("str", index , number);
                       },child: Text("send"),color: Colors.greenAccent)
                   ),
                 ),
@@ -60,21 +77,32 @@ class _suggestionsState extends State<suggestions> {
       ),
     );
   }
+  void getSuggestions(String command) async{
+    await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+      serverSocket.writeln(command);
+      serverSocket.listen((socket) {
+        String show = String.fromCharCodes(socket).trim();
+        List s = show.split("\n");
+        for(int i = 0 ; i< s.length ; i++) {
+          if(!mySuggestoin.SuggestionList.contains(s.elementAt(i)))
+          mySuggestoin.SuggestionList.add(s.elementAt(i));
+        }
+        setState(() {
+        });
+      });
+    });
+  }
 }
 
 
 
-void Send(String str , int num , int number) async{
+void SendAns(String str , int num , int number) async{
   await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
     print('connected');
-    String suggestions = "the String is:suggestions";
+    String suggestions = "the String isR:answer the suggestions";
     suggestions+=str;
     suggestions += "the String is:"+num.toString()+"the String is:"+users.getUsers().elementAt(number).phoneNumber +users.getUsers().elementAt(number).password ;
     serverSocket.writeln(suggestions);
-    serverSocket.listen((socket) {
-      String show = String.fromCharCodes(socket).trim();
-      print(show);
-    });
-
   });
 }
+

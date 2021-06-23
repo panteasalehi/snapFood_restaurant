@@ -23,7 +23,6 @@ class _logInState extends State<logIn> {
   Future<String> ans ;
   @override
   Widget build(BuildContext context) {
-    int turn;
     do{
       return Scaffold(
         body: Container(
@@ -54,21 +53,10 @@ class _logInState extends State<logIn> {
                   child: Text("log in!"),
 
                   onPressed: (){
-                    while(true){
-                      for(int i = 0 ; i<users.getUsers().length ; i++){
-                        if(users.getUsers().elementAt(i).password == password && users.getUsers().elementAt(i).phoneNumber == phoneNumber) {
-                          turn = i;
-                          break;
-                        }
-                      }
-                      break;
-                    }
-
                     String str = "";
                   str+="the String is"+phoneNumber+"the String is"+password;
-
                     if (_formKey.currentState.validate()) {
-                      Send(str , turn);
+                      SendLog(str);
                         setState(() {
                           _formKey.currentState.save();
                         });
@@ -86,25 +74,37 @@ class _logInState extends State<logIn> {
         ),
 
       );
-    }while(!flag);
+    }while(flag);
 
   }
-  void Send(String str , int turn) async{
+  void SendLog(String str) async{
     await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
       print('connected');
-      String logIn = "the String islogin";
+      String logIn = "the String isR:login";
       logIn+=str;
       serverSocket.writeln(logIn);
       serverSocket.listen((socket) {
-        String s = String.fromCharCodes(socket).trim();
-     if(s.contains("user")){
+        String s = new String.fromCharCodes(socket).trim();
+        if(s.contains("user")){
        flag = false;
           showAlertDialog(context);
-     }
-     else{
-       flag = true;
-       print("the turn is "+turn.toString());
-          Navigator.pushNamed(context,"/go",arguments: turn);
+        }
+        else{
+          List<String> logInUser = List.empty(growable: true);
+          logInUser = s.split("the string is");
+          bool sea = false, home= false , fast= false;
+          for(int i = 0 ; i < logInUser.length ; i++)
+            print(logInUser.elementAt(i));
+          if(logInUser.elementAt(3)=="seafood")
+            sea = true;
+          if(logInUser.elementAt(3)=="fastfood")
+            fast = true;
+          if(logInUser.elementAt(3)=="home")
+            home = true;
+          signUp sign = new signUp(logInUser.elementAt(0), logInUser.elementAt(0), sea, home, fast, logInUser.elementAt(4), logInUser.elementAt(5));
+          users.removeUser(sign);
+          users.addUser(sign);
+          Navigator.pushNamed(context,"/go",arguments: users.getUsers().length-1);
      }
       });
     });
@@ -118,6 +118,7 @@ showAlertDialog(BuildContext context) {
     onPressed: () {
       Navigator.of(context).pop();
     },
+
   );
 
   // Create AlertDialog

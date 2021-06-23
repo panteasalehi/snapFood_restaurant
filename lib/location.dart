@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
+import 'package:snap/menu.dart';
 import 'package:snap/users.dart';
 class Location extends StatefulWidget {
   @override
@@ -91,12 +92,11 @@ class _LocationState extends State<Location> {
 
          users.getUsers().elementAt(index).longitude = controller.center.longitude;
           users.getUsers().elementAt(index).latitude = controller.center.latitude;
-          String str = "the String is"+users.getUsers().elementAt(index).longitude.toString()+"the String is"+users.getUsers().elementAt(index).latitude.toString();
-          String str2 = "the String is"+ users.getUsers().elementAt(index).phoneNumber+"the String is"+users.getUsers().elementAt(index).password;
-          str += str2;
-          Send(str);
+          String str = "the String is"+users.getUsers().elementAt(index).longitude.toString()+
+              "the String is"+users.getUsers().elementAt(index).latitude.toString();
+          showAlertDialog(context , str , index);
+
           //here the address of the user is added
-          Navigator.pop(context);
         },
         tooltip: 'add location',
         child: Icon(Icons.check_circle_outline_sharp),
@@ -107,8 +107,45 @@ class _LocationState extends State<Location> {
 void Send(String str) async{
   await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
     print('connected');
-    String location = "the String is:adding location";
+    String location = "the String is:R:adding location";
     location+=str;
     serverSocket.writeln(location);
   });
+}
+showAlertDialog(BuildContext context , String str , int index) {
+
+  // Create button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+
+      String str2 = "the String is"+users.getUsers().elementAt(index).distance+"the String is"+
+          users.getUsers().elementAt(index).phoneNumber+"the String is"+ users.getUsers().elementAt(index).password;
+      str += str2;
+      Send(str);
+      Navigator.push(context, new MaterialPageRoute(builder: (context) => menu()));
+    },
+
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("محدوده سفارش را انتخاب کنید"),
+    content: TextFormField(
+      onChanged: (String value){
+        users.getUsers().elementAt(index).distance = value;
+      },
+    ),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

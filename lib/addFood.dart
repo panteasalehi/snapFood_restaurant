@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:snap/edit.dart';
 import 'package:snap/myfood.dart';
-import 'package:snap/users.dart';
 import 'foodS.dart';
+import 'package:snap/users.dart';
 class addFood extends StatefulWidget {
   @override
   _addFoodState createState() => _addFoodState();
@@ -12,17 +14,18 @@ class _addFoodState extends State<addFood> {
   String name;
   String price;
   String description;
-  bool isFastFood=false;
-  bool isSeaFood=false;
-  bool home=false;
+  bool isFastFood = false;
+  bool isSeaFood = false;
+  bool home = false;
 
-  static List<myfood> seaFoodS = List.empty(growable: true);
-  static List<myfood> fastFoodS = List.empty(growable: true);
-  static List<myfood> homeFoodS = List.empty(growable: true);
   var _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context).settings.arguments as int;
+    int index = ModalRoute
+        .of(context)
+        .settings
+        .arguments as int;
 
     return Scaffold(
       body: Container(
@@ -32,30 +35,30 @@ class _addFoodState extends State<addFood> {
             children: [
 
               TextFormField(
-                onSaved: (String value) {
-                  description= value;
+                onChanged: (String value) {
+                  description = value;
                 },
                 decoration: InputDecoration(
-                  hintText:"enter your food`s description",
+                  hintText: "enter your food`s description",
                 ),
               ),
 
               TextFormField(
                 decoration: InputDecoration(
-                  hintText:"enter your food name",
+                  hintText: "enter your food name",
                 ),
-                onSaved: (String value) {
-                  name= value;
+                onChanged: (String value) {
+                  name = value;
                 },
 
 
               ),
               TextFormField(
-                onSaved: (String value) {
-                  price= value;
+                onChanged: (String value) {
+                  price = value;
                 },
                 decoration: InputDecoration(
-                  hintText:"enter your food`s price",
+                  hintText: "enter your food`s price",
                 ),
               ),
               Row(
@@ -98,25 +101,29 @@ class _addFoodState extends State<addFood> {
               ),
               ElevatedButton(
                 child: Text("save!"),
-                onPressed: (){
+                onPressed: () {
+                  String type;
+                  if(users.getUsers().elementAt(index).isFastFood)
+                    type = "fastfood";
+                  else if(users.getUsers().elementAt(index).isSeaFood)
+                    type = "seafood";
+                  else
+                    type = "home";
+                  String str = "the String isR:add food" + "the String is" +
+                      name + "the String is" + price + "the String is" +
+                      description + "the String is" + users
+                      .getUsers()
+                      .elementAt(index)
+                      .phoneNumber + "the String is"
+                      +"the String istype:"+type;
                   if (_formKey.currentState.validate()) {
+                    foodS.addFood(new myfood(name, price, description), index);
+                    SendFood(str);
                     setState(() {
                       _formKey.currentState.save();
-                      setState(() {
-                        if(isSeaFood)
-                          seaFoodS.add(new myfood(name, price, description));
-                        if(isFastFood)
-                          fastFoodS.add(new myfood(name, price, description));
-                        if(home)
-                          homeFoodS.add(new myfood(name, price, description));
-
-                          foodS.addFood(new myfood(name, price, description),index);
-                          Navigator.push(context, new MaterialPageRoute(builder: (context) => editing()));
-                      },
-                      );
-
                     });
-
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => editing()));
                   }
                 },
               ),
@@ -130,5 +137,12 @@ class _addFoodState extends State<addFood> {
 
 
     );
+  }
+
+  void SendFood(String str) async {
+    await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+      print('connected');
+      serverSocket.writeln(str);
+    });
   }
 }

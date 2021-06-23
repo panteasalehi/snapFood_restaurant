@@ -56,7 +56,7 @@ class _menuState extends State<menu> {
               GestureDetector(
                 child:  _choice(context, "snapfoodPic/images (2).jfif", "History"),
                 onTap: (){
-                  Navigator.push(context, new MaterialPageRoute(builder: (context) => MyStatefulWidget()));
+                 Navigator.pushNamed(context, "report" , arguments: index);
                 },
               ),
 

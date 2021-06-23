@@ -1,4 +1,7 @@
 
+import 'dart:io';
+import 'package:snap/customer.dart';
+import 'package:snap/users.dart';
 import 'package:flutter/material.dart';
 import 'package:snap/clientList.dart';
 
@@ -13,17 +16,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    int index = ModalRoute.of(context).settings.arguments as int;
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
             icon: Icon(
-              Icons.arrow_back_ios_outlined,
+              Icons.refresh,
               color: Colors.greenAccent,
             ),
             onPressed: () {
-             Navigator.pop(context);
+              getHistory(index);
             },
+
 
           ),
         ],
@@ -48,31 +53,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   DataTable(
                       columns: const <DataColumn>[
                         DataColumn(
-                          label: Text('food code'),
-                        ),
-                      ],
-                      rows:  clientList.getcodes().map((e) => DataRow(cells: <DataCell>[DataCell(Text(' $e'))])).toList()
-                  ),
-                  DataTable(
-                      columns: const <DataColumn>[
-                        DataColumn(
                           label: Text('persons name'),
                         ),
                       ],
                       rows:  clientList.getpersons().map((e) => DataRow(cells: <DataCell>[DataCell(Text(' $e'))])).toList()
-                  ),
-
-                ],
-              ),
-              Row(
-                children: [
-                  DataTable(
-                      columns: const <DataColumn>[
-                        DataColumn(
-                          label: Text('food date'),
-                        ),
-                      ],
-                      rows:  clientList.getDate().map((e) => DataRow(cells: <DataCell>[DataCell(Text(' $e'))])).toList()
                   ),
                   DataTable(
                       columns: const <DataColumn>[
@@ -82,14 +66,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ],
                       rows:  clientList.getCost().map((e) => DataRow(cells: <DataCell>[DataCell(Text(' $e'))])).toList()
                   ),
-                  DataTable(
-                      columns: const <DataColumn>[
-                        DataColumn(
-                          label: Text('food is ready?'),
-                        ),
-                      ],
-                      rows:  clientList.getState().map((e) => DataRow(cells: <DataCell>[DataCell(Text(' $e'))])).toList()
-                  ),
                 ],
               ),
             ],
@@ -98,4 +74,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
+}
+void getHistory(int n) async{
+  await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
+    print('connected');
+    String code = "the String is R:get history"+"the String is"+users.getUsers().elementAt(n).phoneNumber+"the String is "+users.getUsers().elementAt(n).password;
+    serverSocket.writeln(code);
+
+    serverSocket.listen((socket) {
+      String s = new String.fromCharCodes(socket).trim();
+      List list = s.split("\n");
+      for(int i = 0 ; i < list.length ; i += 3)
+        clientList.addCustomer(Customer(list.elementAt(i),list.elementAt(i+1),list.elementAt(i+2)));
+    });
+
+  });
 }

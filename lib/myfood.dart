@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'package:snap/signUp.dart';
-import 'package:snap/users.dart';
-import 'package:flutter/cupertino.dart';
+
 
 class myfood{
   String name;

@@ -9,7 +9,6 @@ class foodS{
   static List<myfood> homes = List.empty(growable: true);
   static void addFood(myfood s, int index){
     myfoods.add(s);
-    Send("the String is"+s.getname()+"the String is"+s.getprice()+"the String is"+s.getdescription()+"the String is"+users.getUsers().elementAt(index).phoneNumber+"the String is"+users.getUsers().elementAt(index).password+s.state.toString());
   }
   static void addSeaFood(myfood s){
     seaFoods.add(s);
@@ -26,12 +25,4 @@ class foodS{
   static void removeFood(myfood f){
     myfoods.remove(f);
   }
-}
-void Send(String str) async{
-  await Socket.connect('192.168.43.165', 1122).then((serverSocket) {
-    print('connected');
-    String addingFood = "the String isadd food";
-    addingFood+=str;
-    serverSocket.writeln(addingFood);
-  });
 }
