@@ -25,6 +25,16 @@ class _addUserState extends State<addUser> {
   String distance;
   List<String> saver = List.empty(growable: true);
   String user = "";
+  bool _obscureText = true;
+
+  String _password;
+
+  // Toggles the password show status
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   @override
   Widget build(BuildContext context) {
 do{
@@ -120,11 +130,12 @@ do{
 
             ),
             TextFormField(
+
               onChanged: (String value) {
                 saver.add("the String is:"+value);
                 password= value;
-
               },
+              obscureText: _obscureText,
               validator: (String value){
                 if(value.length < 6)
                   return "choose a longer password";
@@ -145,7 +156,11 @@ do{
               decoration: InputDecoration(
                 hintText:"enter your password",
               ),
+
             ),
+            new FlatButton(
+                onPressed: _toggle,
+                child: new Text(_obscureText ? "Show" : "Hide")),
             ElevatedButton(
               child: Text("add user!"),
               onPressed: (){
