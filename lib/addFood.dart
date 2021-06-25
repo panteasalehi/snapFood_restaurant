@@ -103,9 +103,9 @@ class _addFoodState extends State<addFood> {
                 child: Text("save!"),
                 onPressed: () {
                   String type;
-                  if(users.getUsers().elementAt(index).isFastFood)
+                  if(isFastFood)
                     type = "fastfood";
-                  else if(users.getUsers().elementAt(index).isSeaFood)
+                  else if(isSeaFood)
                     type = "seafood";
                   else
                     type = "home";
@@ -114,8 +114,11 @@ class _addFoodState extends State<addFood> {
                       description + "the String is" + users
                       .getUsers()
                       .elementAt(index)
-                      .phoneNumber + "the String is"
-                      +"the String istype:"+type;
+                      .phoneNumber  + "the String is" + users
+                      .getUsers()
+                      .elementAt(index)
+                      .password
+                      +"the String is"+type;
                   if (_formKey.currentState.validate()) {
                     foodS.addFood(new myfood(name, price, description), index);
                     SendFood(str);

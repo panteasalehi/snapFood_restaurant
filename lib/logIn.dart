@@ -93,15 +93,16 @@ class _logInState extends State<logIn> {
           List<String> logInUser = List.empty(growable: true);
           logInUser = s.split("the string is");
           bool sea = false, home= false , fast= false;
-          for(int i = 0 ; i < logInUser.length ; i++)
-            print(logInUser.elementAt(i));
-          if(logInUser.elementAt(3)=="seafood")
+
+            if(logInUser.elementAt(0).isNotEmpty)
+              print('not empty');
+          if(logInUser.elementAt(2)=="seafood")
             sea = true;
-          if(logInUser.elementAt(3)=="fastfood")
+          if(logInUser.elementAt(2)=="fastfood")
             fast = true;
-          if(logInUser.elementAt(3)=="home")
+          if(logInUser.elementAt(2)=="home")
             home = true;
-          signUp sign = new signUp(logInUser.elementAt(0), logInUser.elementAt(0), sea, home, fast, logInUser.elementAt(4), logInUser.elementAt(5));
+          signUp sign = new signUp(logInUser.elementAt(0), logInUser.elementAt(1), sea, home, fast, logInUser.elementAt(3), logInUser.elementAt(4));
           users.removeUser(sign);
           users.addUser(sign);
           Navigator.pushNamed(context,"/go",arguments: users.getUsers().length-1);

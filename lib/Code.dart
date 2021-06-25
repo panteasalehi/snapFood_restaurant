@@ -27,8 +27,9 @@ class _CodeState extends State<Code> {
             ElevatedButton(
               child: Text("add code!"),
               onPressed: (){
-                String  str = "the String is"+newCode + "the String is"+users.getUsers().elementAt(index).phoneNumber + "the String is"+users.getUsers().elementAt(index).password;
-                Send(str);
+
+                  String  str = "the String is"+newCode + "the String is"+users.getUsers().elementAt(index).phoneNumber + "the String is"+users.getUsers().elementAt(index).password;
+                  Send(str);
                 Navigator.pop(context);
               },
             ),

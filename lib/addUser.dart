@@ -143,7 +143,8 @@ do{
                 int c = 0 ,  n = 0;
                 for(int i =0 ; i < value.length; i++){
                   String s = value.substring(i , i+1);
-                 if(s=='1' || s=='2' || s=='3' || s=='4' || s=='5' || s=='6' || s=='7' || s=='8' || s=='9')
+                  print(s);
+                      if(s=='1' || s=='2' || s=='3' || s=='4' || s=='5' || s=='6' || s=='7' || s=='8' || s=='9')
                    n++;
                  else
                    c++;
@@ -209,7 +210,7 @@ do{
       serverSocket.writeln(signUp);
       serverSocket.listen((socket) {
         String s = new String.fromCharCodes(socket).trim();
-        if(s.contains("user")){
+        if(s.contains("user") && flag){
           flag = false;
           showAlertDialog(context);
         }
